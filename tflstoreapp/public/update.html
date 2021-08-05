@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="scripts/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>CRUD Operations using Ajax jQuery</h1>
+        <hr/>
+            <button id="btnCreate">flowerCreate</button> <br/>
+            <button id="btnRead">flowerRead</button>
+            <button id="btnUpdate">flowerupdate</button>
+            <button id="btnDelete">flowerdelete</button> 
+
+            <button id="btnCreates">customCreate</button> <br/>
+            <button id="btnReads">customRead</button>
+            <button id="btnUpdates">customupdate</button>
+            <button id="btnDeletes">customdelete</button> 
+
+            <button id="btnCreatess">orderCreate</button> <br/>
+            <button id="btnReadss">orderRead</button>
+            <button id="btnUpdatess">orderupdate</button>
+            <button id="btnDeletess">orderdelete</button>  
+
+            <button id="btnCreatesss">orderdetailCreate</button> <br/>
+            <button id="btnReadsss">orderdetailRead</button>
+            <button id="btnUpdatesss">orderdetailupdate</button>
+            <button id="btnDeletesss">orderdetaildelete</button>   
+            <hr/>      
+    <script>
+        $(document).ready(function(){
+            var url="http://localhost:9222/api/folwer";
+            $("#btnCreate").click(function(){
+                // id   | title | discription    | quantity | unitprice | likes
+            var newflower={
+                     "id":13,
+                     "title":"lotus",
+                     "discription":"red colour",
+                     "quantity":20,
+                     "unitprice":250,
+                     "likes":210
+            
+                    };
+                    console.log(newflower);
+                $.ajax({
+                        url: "api/folwer",  // url of rest api
+                        type: 'POST',// request type of rest api
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify(newflower), // data to be sent through request body
+                        success: function (result) {
+                           console.log("new Employee is posted to server ");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+           });
+
+           $("#btnRead").click(function(){             
+                //R operation :Read Operation
+                $.ajax({
+                        url: "/api/folwer",
+                        type: 'GET', 
+                        success: function (result) {
+                            console.log(result);
+                            console.log("All tasks received from server , utlmately from database server");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+
+
+
+            $("#btnUpdate").click(function(){                        
+                
+                var theflo={
+                    "id":2,
+                     "title":"rose",
+                     "discription":"red colour",
+                     "quantity":20,
+                     "unitprice":250,
+                     "likes":210
+                     
+                };
+                console.log(theflo);
+
+
+                let url="/api/folwer/"+theflo.id;
+                //U operation : Update Operation
+                $.ajax({
+                        url: url,  // url of rest api
+                        type: 'PUT',// request type of rest api
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify(theflo), // data to be sent through request body
+                        success: function (result) {
+                        console.log("flower is updated to server ");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+                
+            $("#btnDelete").click(function(){             
+    
+                // used to delete customer from server
+                //D operation: Delete operation
+                $.ajax({
+                        url: url+"/13",
+                        type: 'DELETE',
+                        success: function (result) {
+                            console.log("the flower is deleted from server");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+
+
+
+// custid | custfname | custlname | custemail        | custcontctno
+
+
+            var url1="http://localhost:9222/api/custom";
+            $("#btnCreates").click(function(){
+                
+            var newcustom={
+                     "custid":3,
+                     "custfname":"harsh",
+                     "custlname":"deshmukh",
+                     "custemail ":"harsh@gmail.com",
+                     "custcontctno":250678,
+                     
+            
+                    };
+                    console.log(newcustom);
+                $.ajax({
+                        url: "api/custom",  // url of rest api
+                        type: 'POST',// request type of rest api
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify(newcustom), // data to be sent through request body
+                        success: function (result) {
+                           console.log("new customer is posted to server ");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+           });
+
+           $("#btnReads").click(function(){             
+                //R operation :Read Operation
+                $.ajax({
+                        url: "/api/custom",
+                        type: 'GET', 
+                        success: function (result) {
+                            console.log(result);
+                            console.log("All tasks received from server , utlmately from database server");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+
+
+
+            $("#btnUpdates").click(function(){                        
+                
+                var theflo={
+                    "custid":3,
+                     "custfname":"rutu",
+                     "custlname":"deshmukh",
+                     "custemail ":"rutu@gmail.com",
+                     "custcontctno":12567,
+                     
+                };
+                console.log(theflo);
+
+
+                let url="/api/custom/"+theflo.custid;
+                //U operation : Update Operation
+                $.ajax({
+                        url: url1,  // url of rest api
+                        type: 'PUT',// request type of rest api
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify(theflo), // data to be sent through request body
+                        success: function (result) {
+                        console.log("flower is updated to server ");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+                
+            $("#btnDeletes").click(function(){             
+    
+                // used to delete customer from server
+                //D operation: Delete operation
+                $.ajax({
+                        url: url1+"/3",
+                        type: 'DELETE',
+                        success: function (result) {
+                            console.log("the flower is deleted from server");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+
+            //orderid | orderdate  | custid | amount
+            var url2="http://localhost:9222/api/neworderss";
+            $("#btnCreatess").click(function(){
+                
+            var neworder={
+                     "orderid":3,
+                     "orderdate":"2020-04-19",
+                     "custid":8,
+                     "amount":670,
+            
+                    };
+                    console.log(neworder);
+                $.ajax({
+                        url: "api/neworderss",  // url of rest api
+                        type: 'POST',// request type of rest api
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify(neworder), // data to be sent through request body
+                        success: function (result) {
+                           console.log("new order is posted to server ");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+           });
+
+           $("#btnReadss").click(function(){             
+                //R operation :Read Operation
+                $.ajax({
+                        url: "/api/neworderss",
+                        type: 'GET', 
+                        success: function (result) {
+                            console.log(result);
+                            console.log("All tasks received from server , utlmately from database server");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+
+
+
+            $("#btnUpdatess").click(function(){                        
+                
+                var theflo={
+                    "orderid":3,
+                     "orderdate":"2021-05-13",
+                     "custid":9,
+                     "amount":600,
+                     
+                };
+                console.log(theflo);
+
+
+                let url="/api/neworderss/"+theflo.orderid;
+                //U operation : Update Operation
+                $.ajax({
+                        url: url2,  // url of rest api
+                        type: 'PUT',// request type of rest api
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify(theflo), // data to be sent through request body
+                        success: function (result) {
+                        console.log("flower is updated to server ");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+                
+            $("#btnDeletess").click(function(){             
+    
+                // used to delete customer from server
+                //D operation: Delete operation
+                $.ajax({
+                        url: url2+"/3",
+                        type: 'DELETE',
+                        success: function (result) {
+                            console.log("the flower is deleted from server");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+
+
+
+//orderdetailid | orderid | flowerid | orderquantity
+
+            var url3="http://localhost:9222/api/orderdetail";
+            $("#btnCreatesss").click(function(){
+                
+            var neworderdetail={
+                     "orderdetailid":4,
+                     "orderid":7,
+                     "flowerid":9,
+                     "orderquantity":207,
+            
+                    };
+                    console.log(neworderdetail);
+                $.ajax({
+                        url: "api/orderdetail",  // url of rest api
+                        type: 'POST',// request type of rest api
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify(neworderdetail), // data to be sent through request body
+                        success: function (result) {
+                           console.log("new order is posted to server ");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+           });
+
+           $("#btnReadsss").click(function(){             
+                //R operation :Read Operation
+                $.ajax({
+                        url: "/api/orderdetail",
+                        type: 'GET', 
+                        success: function (result) {
+                            console.log(result);
+                            console.log("All tasks received from server , utlmately from database server");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+
+
+
+            $("#btnUpdatesss").click(function(){                        
+                
+                var theflo={
+                    "orderdetailid":4,
+                     "orderid":7,
+                     "flowerid":14,
+                     "orderquantity":89,
+            
+                     
+                };
+                console.log(theflo);
+
+
+                let url="/api/orderdeatil/"+theflo.orderdetailid;
+                //U operation : Update Operation
+                $.ajax({
+                        url: url3,  // url of rest api
+                        type: 'PUT',// request type of rest api
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify(theflo), // data to be sent through request body
+                        success: function (result) {
+                        console.log("flower is updated to server ");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+                
+            $("#btnDeletesss").click(function(){             
+    
+                // used to delete customer from server
+                //D operation: Delete operation
+                $.ajax({
+                        url: url3+"/4",
+                        type: 'DELETE',
+                        success: function (result) {
+                            console.log("the flower is deleted from server");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+</script>
